@@ -1,16 +1,17 @@
 def find_product_by_name(products, name):
     for product in products:
-        if product["name"].lower() == name:
+        if product["name"].lower() == name.strip().lower():
             return product
     return None
 
 
 def low_stock_products(products, threshold=5):
-    return [p for p in products if p["stock"] < threshold and p["stock"] > 0]
+    return [p for p in products if p["stock"] < threshold]
+
 
 
 def products_sorted_by_price(products):
-    products.sort(key=lambda p: p["stock"])
+    products.sort(key=lambda p: p["price"])
     return products
 
 
