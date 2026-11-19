@@ -30,7 +30,10 @@ def calculate_shipping(discounted_subtotal):
 
 def process_order(order, products, customers, tax_rates):
     customer = find_customer_by_id(customers, order.get("customer_id"))
-
+    #No check here for customer == None
+    if(customer == None):
+        raise ValueError("Customer doe snot exist")
+        
     errors = validate_order(order, products, customers)
 
     subtotal = calculate_subtotal(order, products)
