@@ -17,20 +17,20 @@ def calculate_subtotal(order, products):
 
 
 def calculate_tax(customer, discounted_subtotal, tax_rates):
-    state = customer.get("state", "NJ")
-    rate = tax_rates.get(state, 0.07)
+    state = customer.get("state")
+    rate = tax_rates.get(state)
     return round(discounted_subtotal * rate, 2)
 
 
 def calculate_shipping(discounted_subtotal):
-    if discounted_subtotal > 100:
+    if discounted_subtotal >= 100:
         return 0
     return 8.99
 
 
 def process_order(order, products, customers, tax_rates):
     customer = find_customer_by_id(customers, order.get("customer_id"))
-
+        
     errors = validate_order(order, products, customers)
 
     subtotal = calculate_subtotal(order, products)
